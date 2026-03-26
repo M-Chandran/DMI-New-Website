@@ -3,6 +3,8 @@ import { AppRoutes } from './router';
 import { useState, useEffect } from 'react';
 import SplashScreen from './components/SplashScreen';
 import FloatingActionWidget from './components/feature/FloatingActionWidget';
+import ErrorBoundary from './components/ErrorBoundary';
+
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -23,10 +25,13 @@ function App() {
   return (
     <>
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
-      <BrowserRouter basename={__BASE_PATH__}>
-        <AppRoutes />
+<BrowserRouter basename={__BASE_PATH__}>
+        <ErrorBoundary>
+          <AppRoutes />
+        </ErrorBoundary>
         <FloatingActionWidget />
       </BrowserRouter>
+
     </>
   );
 }
